@@ -63,7 +63,7 @@
   ],
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     "opens": "08:00",
     "closes": "18:00"
   },
@@ -257,7 +257,7 @@
         <h2 class="section-title">A process built to remove the risk from hiring a painter</h2>
         <p class="lede">Most painting horror stories come down to three things: mess left behind, crews that don't show up when they say they will, and a final bill that doesn't match the estimate. Here's how we avoid all three.</p>
       </div>
-      <div class="process-list reveal">
+      <div class="process-list reveal carousel-mobile" id="process-carousel">
         <div class="process-step">
           <h3>Protect</h3>
           <p>Floors, furniture, and fixtures get covered before anything else happens.</p>
@@ -282,6 +282,14 @@
           <h3>Walkthrough</h3>
           <p>We walk the finished job with you before we consider it done.</p>
         </div>
+      </div>
+      <div class="carousel-dots on-dark" id="process-dots">
+        <button type="button" aria-label="Go to step 1"></button>
+        <button type="button" aria-label="Go to step 2"></button>
+        <button type="button" aria-label="Go to step 3"></button>
+        <button type="button" aria-label="Go to step 4"></button>
+        <button type="button" aria-label="Go to step 5"></button>
+        <button type="button" aria-label="Go to step 6"></button>
       </div>
     </div>
   </section>
@@ -353,7 +361,7 @@
         </div>
         <a class="btn btn-secondary" style="margin-left:auto" href="https://www.google.com/search?q=rocas+painting&oq=rocas&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDwyBggCEEUYOTIGCAMQRRg8MgYIBBBFGD0yBggFEEUYPNIBCDMwODdqMGo3qAIAsAIA&sourceid=chrome&source=chrome.ob&ie=UTF-8#lrd=0x883b372315d146cb:0x59b4eb765cda8989,1,,,," target="_blank" rel="noopener">Read all reviews</a>
       </div>
-      <div class="card-grid cols-3 reveal">
+      <div class="card-grid cols-3 reveal carousel-mobile" id="reviews-carousel">
         <div class="review-card">
           <div class="stars" aria-hidden="true">★★★★★</div>
           <blockquote>"I have had Roca's Painting do 2 jobs for me now and both were quality work at a fair price. I had a ceiling repair that needed to be done prior to painting which was on an older plaster ceiling and they did an excellent job. I would highly recommend them to anyone."</blockquote>
@@ -369,6 +377,11 @@
           <blockquote>"We are absolutely thrilled with the great work Roca's did on our house! They were fast, professional, and truly kind people. They sincerely cared about making our house look fantastic. Our garage and house look 50 years younger than they did yesterday morning. Thank you Roca's!"</blockquote>
           <cite>Alexandra Miller</cite>
         </div>
+      </div>
+      <div class="carousel-dots" id="reviews-dots">
+        <button type="button" aria-label="Go to review 1"></button>
+        <button type="button" aria-label="Go to review 2"></button>
+        <button type="button" aria-label="Go to review 3"></button>
       </div>
       <div class="trust-badge-row reveal">
         <a class="trust-badge" href="https://pcapainted.org" target="_blank" rel="noopener">
@@ -575,7 +588,7 @@
           <li><a href="tel:+15863620208">586-362-0208</a></li>
           <li><a href="mailto:painting@rocaspainting.com">painting@rocaspainting.com</a></li>
           <li>1853 Stewart Ave<br>Lincoln Park, MI 48146</li>
-          <li>Mon–Fri: 8:00 AM–6:00 PM<br>Sat–Sun: [PLACEHOLDER: confirm weekend hours]</li>
+          <li>Open Daily: 8:00 AM–6:00 PM</li>
         </ul>
       </div>
       <div class="footer-col">

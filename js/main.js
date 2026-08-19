@@ -76,6 +76,116 @@
     });
   }
 
+  /* Mobile-only carousels (reviews, process steps on the homepage).
+     Swipeable via native scroll-snap; auto-advances every 2.5s; pauses
+     while the user is actively touching it; only runs under 1000px. */
+  function initCarousel(containerId, dotsId, intervalMs) {
+    var container = document.getElementById(containerId);
+    var dotsWrap = document.getElementById(dotsId);
+    if (!container || !dotsWrap) return;
+
+    var dots = Array.prototype.slice.call(dotsWrap.children);
+    var mq = window.matchMedia("(max-width: 999px)");
+    var timer = null;
+    var currentIndex = 0;
+
+    function setActiveDot(index) {
+      dots.forEach(function (d, i) {
+        d.classList.toggle("active", i === index);
+      });
+    }
+
+    function goTo(index, smooth) {
+      var items = container.children;
+      if (!items.length) return;
+      index = ((index % items.length) + items.length) % items.length;
+      currentIndex = index;
+      var itemRect = items[index].getBoundingClientRect();
+      var containerRect = container.getBoundingClientRect();
+      var targetLeft = container.scrollLeft + (itemRect.left - containerRect.left);
+      container.scrollTo({ left: targetLeft, behavior: smooth === false ? "auto" : "smooth" });
+      setActiveDot(index);
+    }
+
+    function closestIndex() {
+      var items = container.children;
+      var containerRect = container.getBoundingClientRect();
+      var closest = 0;
+      var closestDist = Infinity;
+      for (var i = 0; i < items.length; i++) {
+        var dist = Math.abs(items[i].getBoundingClientRect().left - containerRect.left);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closest = i;
+        }
+      }
+      return closest;
+    }
+
+    function start() {
+      stop();
+      timer = setInterval(function () {
+        goTo(currentIndex + 1);
+      }, intervalMs);
+    }
+
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    var scrollSettle;
+    container.addEventListener(
+      "scroll",
+      function () {
+        clearTimeout(scrollSettle);
+        scrollSettle = setTimeout(function () {
+          currentIndex = closestIndex();
+          setActiveDot(currentIndex);
+        }, 120);
+      },
+      { passive: true }
+    );
+
+    container.addEventListener("touchstart", stop, { passive: true });
+    container.addEventListener(
+      "touchend",
+      function () {
+        if (mq.matches) start();
+      },
+      { passive: true }
+    );
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener("click", function () {
+        goTo(i);
+        if (mq.matches) start();
+      });
+    });
+
+    function handleMqChange(e) {
+      if (e.matches) {
+        goTo(0, false);
+        start();
+      } else {
+        stop();
+      }
+    }
+
+    if (mq.addEventListener) {
+      mq.addEventListener("change", handleMqChange);
+    }
+    if (mq.matches) {
+      setActiveDot(0);
+      start();
+    }
+  }
+
+  initCarousel("reviews-carousel", "reviews-dots", 2500);
+  initCarousel("process-carousel", "process-dots", 2500);
+
   /* Estimate form: AJAX submit to Formspree so we can show inline success/error */
   var form = document.querySelector(".estimate-form");
   if (form) {

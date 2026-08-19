@@ -1464,12 +1464,22 @@ a.trust-badge:hover {
   color: var(--color-ink);
   display: grid;
   gap: var(--space-sm);
+  /* Grid items default to min-width:auto, which lets a <select>'s
+     currently-selected option text (e.g. "Specialty & Industrial") force
+     this wider than its track and overflow the layout. min-width:0 lets it
+     actually shrink to the assigned column width. */
+  min-width: 0;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-sm);
+  min-width: 0;
+}
+
+.field {
+  min-width: 0;
 }
 
 @media (min-width: 560px) {
@@ -1494,6 +1504,7 @@ a.trust-badge:hover {
 .field select,
 .field textarea {
   width: 100%;
+  min-width: 0;
   padding: 0.85em 1em;
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -1958,4 +1969,67 @@ body {
   .form-row.two {
     flex-wrap: nowrap;
   }
+}
+
+/* ==========================================================================
+   Mobile-only carousels — reviews and process steps on the homepage.
+   Desktop keeps the static grid; below 1000px it becomes a swipeable,
+   auto-advancing, scroll-snap strip. Placed last so it wins the cascade
+   over the base .card-grid / .process-list rules without !important.
+   ========================================================================== */
+
+@media (max-width: 999px) {
+  .carousel-mobile {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .carousel-mobile::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-mobile > * {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: center;
+  }
+}
+
+.carousel-dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: var(--space-md);
+}
+
+@media (max-width: 999px) {
+  .carousel-dots {
+    display: flex;
+  }
+}
+
+.carousel-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: background var(--duration-sm) var(--ease-out), transform var(--duration-sm) var(--ease-spring);
+}
+
+.carousel-dots button.active {
+  background: var(--color-terracotta);
+  transform: scale(1.35);
+}
+
+.carousel-dots.on-dark button {
+  background: rgba(255, 253, 249, 0.28);
+}
+
+.carousel-dots.on-dark button.active {
+  background: var(--color-gold);
 }
