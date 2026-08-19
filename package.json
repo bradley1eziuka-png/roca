@@ -1,0 +1,11 @@
+{
+  "name": "rocas-painting-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "python3 -m http.server 3000"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.62.1"
+  }
+}

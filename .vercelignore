@@ -1,0 +1,31 @@
+# Local QA tooling — not part of the deployed site
+node_modules
+package.json
+package-lock.json
+screenshot.mjs
+temporary screenshots
+
+# Skill/reference material used to build the site — not site content
+CLAUDE.md
+Frontend design skill.md
+Agent-Skills-for-Context-Engineering-main
+marketingskills-main
+stop-slop-main
+ui-ux-pro-max-skill-main
+Brand Assets
+
+# Raw source uploads — processed versions live in /images/
+Roca logo.png
+Color wheel.png
+image.png
+image copy.png
+image copy 3.png
+image copy 6.png
+image copy 8.png
+image copy 9.png
+image copy 10.png
+image copy 11.png
+image copy 12.png
+image copy 13.png
+
+.DS_Store
