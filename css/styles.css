@@ -1875,6 +1875,29 @@ body {
   object-fit: cover;
 }
 
+/* Text-only variant — used when no real project photo is available yet.
+   Centers and constrains the copy instead of leaving an empty grid track
+   where the visual would have gone. */
+.mini-hero.no-visual {
+  padding-block: var(--space-xl) calc(var(--space-xl) + var(--space-md));
+  background: radial-gradient(ellipse 900px 500px at 50% 0%, rgba(242, 147, 43, 0.18), transparent 60%), var(--color-surface);
+}
+
+.mini-hero.no-visual .container {
+  max-width: 780px;
+  text-align: center;
+}
+
+.mini-hero.no-visual .hero-ctas {
+  justify-content: center;
+}
+
+@media (min-width: 900px) {
+  .mini-hero.no-visual .container {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Two column content block (benefits) */
 .split-block {
   display: grid;
