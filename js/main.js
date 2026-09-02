@@ -186,6 +186,64 @@
   initCarousel("reviews-carousel", "reviews-dots", 2500);
   initCarousel("process-carousel", "process-dots", 2500);
 
+  /* Gallery lightbox */
+  (function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll(".gallery-item"));
+    var lightbox = document.getElementById("lightbox");
+    if (!items.length || !lightbox) return;
+
+    var imgEl = document.getElementById("lightbox-img");
+    var captionEl = document.getElementById("lightbox-caption");
+    var closeBtn = lightbox.querySelector(".lightbox-close");
+    var prevBtn = lightbox.querySelector(".lightbox-nav.prev");
+    var nextBtn = lightbox.querySelector(".lightbox-nav.next");
+    var currentIndex = 0;
+    var lastFocused = null;
+
+    function openAt(index) {
+      currentIndex = ((index % items.length) + items.length) % items.length;
+      var item = items[currentIndex];
+      var img = item.querySelector("img");
+      var caption = item.querySelector(".city");
+      imgEl.src = img.src;
+      imgEl.alt = img.alt;
+      captionEl.textContent = caption ? caption.textContent : "";
+      lastFocused = document.activeElement;
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      }
+    }
+
+    items.forEach(function (item, i) {
+      item.addEventListener("click", function () {
+        openAt(i);
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+    if (prevBtn) prevBtn.addEventListener("click", function () { openAt(currentIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { openAt(currentIndex + 1); });
+
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (lightbox.hidden) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") openAt(currentIndex - 1);
+      if (e.key === "ArrowRight") openAt(currentIndex + 1);
+    });
+  })();
+
   /* Estimate form: AJAX submit to Formspree so we can show inline success/error */
   var form = document.querySelector(".estimate-form");
   if (form) {

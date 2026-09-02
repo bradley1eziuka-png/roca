@@ -1051,10 +1051,49 @@ body.nav-open {
 
 .gallery-item {
   position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   aspect-ratio: 4 / 3;
+}
+
+.gallery-item .expand-icon {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(18, 48, 63, 0.55);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--duration-sm) var(--ease-out), transform var(--duration-sm) var(--ease-spring);
+  backdrop-filter: blur(4px);
+}
+
+.gallery-item .expand-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.gallery-item:hover .expand-icon,
+.gallery-item:focus-visible .expand-icon {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .gallery-grid .gallery-item.feature {
@@ -2032,4 +2071,154 @@ body {
 
 .carousel-dots.on-dark button.active {
   background: var(--color-gold);
+}
+
+/* ==========================================================================
+   Gallery lightbox
+   ========================================================================== */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: rgba(10, 22, 29, 0.92);
+  backdrop-filter: blur(6px);
+  animation: lightbox-fade 220ms var(--ease-out);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-figure {
+  position: relative;
+  max-width: min(1100px, 92vw);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-figure img {
+  max-width: 100%;
+  max-height: 76vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.lightbox-figure figcaption {
+  margin-top: var(--space-sm);
+  color: var(--color-white);
+  font-weight: 700;
+  text-align: center;
+}
+
+.lightbox-close,
+.lightbox-nav {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 253, 249, 0.12);
+  color: var(--color-white);
+  transition: background var(--duration-sm) var(--ease-out), transform var(--duration-sm) var(--ease-spring);
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+  background: rgba(255, 253, 249, 0.22);
+  transform: scale(1.06);
+}
+
+.lightbox-close svg,
+.lightbox-nav svg {
+  width: 22px;
+  height: 22px;
+}
+
+.lightbox-close {
+  top: var(--space-md);
+  right: var(--space-md);
+}
+
+.lightbox-nav.prev {
+  left: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-nav.next {
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-nav.prev svg {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 640px) {
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+  }
+  .lightbox-close {
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+}
+
+/* ==========================================================================
+   Brand statement band (tagline pairing, sits between trust bar and services)
+   ========================================================================== */
+
+.brand-statement {
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-soft);
+  text-align: center;
+}
+
+.brand-statement-title {
+  font-family: var(--font-serif-accent);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.25rem, 1.05rem + 1vw, 1.75rem);
+  color: var(--color-navy-deep);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4em;
+}
+
+.brand-statement-sub {
+  font-size: 1rem;
+  color: var(--color-navy-mid);
+  max-width: 46ch;
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   Service areas — wider grid to fit up to 11 cities cleanly
+   ========================================================================== */
+
+@media (min-width: 860px) {
+  .area-list.wide {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
