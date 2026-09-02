@@ -1047,6 +1047,12 @@ body.nav-open {
     grid-column: span 2;
     grid-row: span 2;
   }
+  /* Homepage preview is a fixed set of 6 — stay at 3 columns (2 clean
+     rows) instead of the 4-col layout, which would strand 2 items alone
+     in a last row. */
+  .gallery-grid.preview {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .gallery-item {
