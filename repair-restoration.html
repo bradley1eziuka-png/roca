@@ -308,22 +308,22 @@
             <li><svg><use href="#icon-check"/></svg>1-year workmanship warranty on every job</li>
           </ul>
         </div>
-        <form class="estimate-form" action="FORMSPREE_ENDPOINT_HERE" method="POST" enctype="multipart/form-data">
+        <form class="estimate-form" action="https://formspree.io/f/mppzrdgd" method="POST" enctype="multipart/form-data">
           <div class="form-success" role="status">Thanks, your request is in. We'll be in touch shortly to schedule your walkthrough.</div>
           <div class="form-error" role="alert">Something went wrong sending your request. Please call 586-362-0208 or try again.</div>
           <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" name="_subject" value="New estimate request: Repair & Restoration page">
           <div class="form-row two">
-            <div class="field"><label for="name">Full name <span class="req">*</span></label><input type="text" id="name" name="Name" required autocomplete="name"></div>
-            <div class="field"><label for="phone">Phone <span class="req">*</span></label><input type="tel" id="phone" name="Phone" required autocomplete="tel"></div>
+            <div class="field"><label for="name">Full name <span class="req">*</span></label><input type="text" id="name" name="full_name" required autocomplete="name"></div>
+            <div class="field"><label for="phone">Phone <span class="req">*</span></label><input type="tel" id="phone" name="phone" required autocomplete="tel"></div>
           </div>
           <div class="form-row two">
-            <div class="field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="Email" required autocomplete="email"></div>
-            <div class="field"><label for="cityzip">City / ZIP <span class="req">*</span></label><input type="text" id="cityzip" name="City / ZIP" required></div>
+            <div class="field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" required autocomplete="email"></div>
+            <div class="field"><label for="cityzip">City / ZIP <span class="req">*</span></label><input type="text" id="cityzip" name="city_zip" required></div>
           </div>
           <div class="field">
             <label for="project-type">Project type <span class="req">*</span></label>
-            <select id="project-type" name="Project Type" required>
+            <select id="project-type" name="project_type" required>
               <option value="" disabled>Select one</option>
               <option>Interior</option>
               <option>Exterior</option>
@@ -336,11 +336,11 @@
           </div>
           <div class="field">
             <label for="details">Tell us about your project <span style="font-weight:500;color:var(--color-navy-soft)">(optional)</span></label>
-            <textarea id="details" name="Project Details" placeholder="Type and size of damage, timeline, anything we should know."></textarea>
+            <textarea id="details" name="project_details" placeholder="Type and size of damage, timeline, anything we should know."></textarea>
           </div>
           <div class="field file">
             <label for="photos">Upload photos <span style="font-weight:500;color:var(--color-navy-soft)">(optional)</span></label>
-            <input type="file" id="photos" name="Photos" accept="image/*" multiple>
+            <input type="file" id="photos" name="photo" accept="image/*" multiple>
             <p class="field-hint">A photo of the damage helps us scope the repair before we even arrive.</p>
           </div>
           <button type="submit" class="btn btn-primary btn-lg btn-block">Request My Free Estimate</button>
