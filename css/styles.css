@@ -1121,7 +1121,9 @@ body.nav-open {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(18, 48, 63, 0.82) 0%, rgba(18, 48, 63, 0.15) 40%, transparent 65%);
+  /* Tightened to a bottom-hugging scrim (was 0/40/65) so it just covers
+     the caption text instead of shading nearly two-thirds of the photo. */
+  background: linear-gradient(to top, rgba(18, 48, 63, 0.88) 0%, rgba(18, 48, 63, 0.22) 24%, transparent 44%);
   mix-blend-mode: multiply;
 }
 
@@ -1145,6 +1147,24 @@ body.nav-open {
   display: block;
   font-size: 0.78rem;
   color: rgba(255, 253, 249, 0.8);
+}
+
+/* Below the grid's own 2-col breakpoint: smaller type, tighter padding,
+   and drop the "Category ·" prefix (the section heading already gives the
+   category) so captions stop wrapping to 2-3 lines and covering the photo. */
+@media (max-width: 699px) {
+  .gallery-caption {
+    padding: var(--space-2xs) var(--space-xs) var(--space-xs);
+  }
+
+  .gallery-caption .city {
+    font-size: 0.74rem;
+    letter-spacing: 0.005em;
+  }
+
+  .gallery-caption .cap-prefix {
+    display: none;
+  }
 }
 
 /* ==========================================================================
