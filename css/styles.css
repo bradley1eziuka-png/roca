@@ -1946,6 +1946,17 @@ body {
   object-fit: cover;
 }
 
+/* Cabinet refinishing "before" photo is a wide-angle room shot with a
+   cluttered foreground counter. Bias the crop toward the top of the frame
+   so the cabinets get more visual weight and the counter clutter is pushed
+   toward the bottom edge. Note: the clutter sits too close to the vertical
+   center of this portrait photo to be fully excluded by a 4:3 crop, so some
+   remains visible; this only reduces its prominence. */
+.gallery-item img.crop-top,
+.mini-hero-visual img.crop-top {
+  object-position: 50% 10%;
+}
+
 .check-list {
   display: grid;
   gap: var(--space-xs);
